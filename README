@@ -1,0 +1,53 @@
+ISP logs parser
+===============
+
+Often dishonest ISP gives unreadable (by human beings) logs when asked for details of internet traffic expense.
+This issue is especially actual if you pay by amount of traffic.
+
+isp-logs-parser was invented to help ISP customers extract needed info from such logs.
+For instance, the most frequent question is "which sites I spen all my traffic for?"
+
+Example of unreadable log:
+--------------------------
+
+timestamp account_id source destination t_class packets bytes sport dport date
+1250878466 144 77.235.9.36 217.29.21.21 260 5 552 51003 80 Sat Aug 22 00:14:26 2009
+1250878466 144 217.29.21.21 77.235.9.36 270 4 503 80 51003 Sat Aug 22 00:14:26 2009
+1250878469 144 77.235.9.36 217.29.21.21 260 5 534 51005 80 Sat Aug 22 00:14:29 2009
+1250878469 144 217.29.21.21 77.235.9.36 270 4 539 80 51005 Sat Aug 22 00:14:29 2009
+1250878471 144 91.205.50.34 77.235.9.36 270 7 829 50536 8483 Sat Aug 22 00:14:31 2009
+1250878472 144 77.235.9.36 217.29.21.21 260 5 542 51007 80 Sat Aug 22 00:14:32 2009
+1250878472 144 217.29.21.21 77.235.9.36 270 4 551 80 51007 Sat Aug 22 00:14:32 2009
+1250878472 144 77.235.9.36 217.29.21.21 260 5 536 51008 80 Sat Aug 22 00:14:32 2009
+......
+
+
+Example of isp-logs-parser output:
+----------------------------------
+
+=== Incoming traffic ===
+77.235.9.36 <- 212.112.103.210 [660MB]
+77.235.9.36 <- 86.40.182.30 [147MB]
+77.235.9.36 <- 212.112.98.122 [80.7MB]
+77.235.9.36 <- 91.207.97.14 [76.2MB]
+77.235.9.36 <- 195.38.179.6 [54.5MB]
+77.235.9.36 <- 87.248.210.200 [35.5MB]
+77.235.9.36 <- 87.248.209.186 [32.9MB]
+77.235.9.36 <- 81.20.21.134 [28.2MB]
+77.235.9.36 <- 212.2.225.131 [21.4MB]
+77.235.9.36 <- 91.205.50.59 [16.3MB]
+
+=== Outcoming traffic ===
+77.235.9.36 -> 212.112.103.210 [34.7GB]
+77.235.9.36 -> 81.20.21.134 [1.91GB]
+77.235.9.36 -> 217.29.28.102 [619MB]
+77.235.9.36 -> 91.207.97.23 [456MB]
+77.235.9.36 -> 195.38.161.22 [329MB]
+77.235.9.36 -> 77.95.63.107 [223MB]
+77.235.9.36 -> 212.42.120.60 [190MB]
+77.235.9.36 -> 89.237.225.37 [129MB]
+77.235.9.36 -> 217.29.20.18 [99.7MB]
+77.235.9.36 -> 85.115.205.44 [88.8MB]
+
+
+Copyright (c) 2009 Daniel Vartanov, released under the MIT license
