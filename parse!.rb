@@ -1,5 +1,25 @@
 #!/usr/bin/ruby
 
+# TODO
+# Указание провайдера хоста, если KG и "мир" если мир.
+# {
+#   'KT' => [start_ip, end_ip],
+#   ...
+# }
+#
+# Деление на день и ночь.
+# {
+#   'day' => [start_time, end_time]
+# }
+# 
+# Push to GitHub (yeah! isp-logs-parser)
+#
+# DNS резолвинг
+#
+# Сервер на Синатре, куда аплоадить файл и смотреть
+#
+# Суси -> оформить
+
 require 'parser'
 require 'benchmark'
 require 'nice_bytes'
