@@ -9,7 +9,6 @@ For instance, the most frequent question is "which sites I spen all my traffic f
 
 Example of unreadable log:
 --------------------------
-
 timestamp account_id source destination t_class packets bytes sport dport date
 1250878466 144 77.235.9.36 217.29.21.21 260 5 552 51003 80 Sat Aug 22 00:14:26 2009
 1250878466 144 217.29.21.21 77.235.9.36 270 4 503 80 51003 Sat Aug 22 00:14:26 2009
@@ -24,7 +23,6 @@ timestamp account_id source destination t_class packets bytes sport dport date
 
 Example of isp-logs-parser output:
 ----------------------------------
-
 === Incoming traffic ===
 77.235.9.36 <- 212.112.103.210 [660MB]
 77.235.9.36 <- 86.40.182.30 [147MB]

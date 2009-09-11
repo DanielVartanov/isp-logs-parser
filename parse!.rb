@@ -1,32 +1,19 @@
 #!/usr/bin/ruby
 
-# TODO
-# Указание провайдера хоста, если KG и "мир" если мир.
-# {
-#   'KT' => [start_ip, end_ip],
-#   ...
-# }
-#
-# Деление на день и ночь.
-# {
-#   'day' => [start_time, end_time]
-# }
-# 
-# Push to GitHub (yeah! isp-logs-parser)
-#
-# DNS резолвинг
-#
-# Сервер на Синатре, куда аплоадить файл и смотреть
-#
-# Суси -> оформить
+def load_lib_files
+  glob = File.join('lib', '**', '*.rb')
+  Dir.glob(glob).each do |file|
+    require file
+  end
+end
 
-require 'parser'
 require 'benchmark'
-require 'nice_bytes'
+
+load_lib_files
 
 @user_address = '77.235.9.36'
 
-filename = 'log.txt'
+filename = 'sample.log'
 puts "Parsing file #{filename}..."
 file = File.new(filename, "r")
 
