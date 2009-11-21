@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'spec_helper')
+require File.join(File.dirname(__FILE__), '..', 'spec_helper')
 
 describe Traffic do
 	describe "given a bunch of records" do
@@ -26,8 +26,12 @@ describe Traffic do
 					@return_value = @traffic.incoming
 				end
 				
-				it "should return incoming records only" do
-					@return_value.to_set.should == [Record.new(@facebook, @local_address), Record.new(@gmail, @local_address)].to_set
+				it "should return a Traffic instance" do
+					@return_value.should be_kind_of(Traffic)
+				end
+
+				it "should narrow records to incoming traffic only" do
+					@return_value.records.to_set.should == [Record.new(@facebook, @local_address), Record.new(@gmail, @local_address)].to_set
 				end
 			end
 			
@@ -35,11 +39,16 @@ describe Traffic do
 				before :each do
 					@return_value = @traffic.outcoming
 				end
+				
+				it "should return a Traffic instance" do
+					@return_value.should be_kind_of(Traffic)
+				end
 
-				it "should return outcoming records only" do
-					@return_value.to_set.should == [Record.new(@local_address, @facebook), Record.new(@local_address, @gmail)].to_set
+				it "should narrow records to outcoming traffic only" do
+					@return_value.records.to_set.should == [Record.new(@local_address, @facebook), Record.new(@local_address, @gmail)].to_set
 				end
 			end
 		end
 	end
 end
+
