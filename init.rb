@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'activesupport'
 __DIR__ = File.dirname(__FILE__)
 Dir.glob(File.join(__DIR__, 'lib', '**', '*.rb')).each { |file| require file }
