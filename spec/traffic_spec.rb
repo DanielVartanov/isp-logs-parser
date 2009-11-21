@@ -28,7 +28,7 @@ describe Traffic do
 				end
 				
 				it "should return incoming records only" do
-					@return_values.to_set == [Record.new(@facebook, @local_address), Record.new(@gmail, @local_address)]
+					@return_value.to_set == [Record.new(@facebook, @local_address), Record.new(@gmail, @local_address)]
 				end
 			end
 			
@@ -38,7 +38,7 @@ describe Traffic do
 				end
 				
 				it "should return outcoming records only" do
-					@return_values.to_set == [Record.new(@local_address, @facebook), Record.new(@local_address, @gmail)]
+					@return_value.to_set == [Record.new(@local_address, @facebook), Record.new(@local_address, @gmail)]
 				end
 			end
 		end
