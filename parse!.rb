@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 
-Dir.glob(File.join('lib', '**', '*.rb')).each { |file| require file }
+__DIR__ = File.dirname(__FILE__)
+require File.join(__DIR__, 'init')
 
 user_address = '77.235.9.36'
 file_name = 'sample.log'

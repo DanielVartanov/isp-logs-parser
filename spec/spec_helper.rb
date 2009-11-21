@@ -1,2 +1,2 @@
 __DIR__ = File.dirname(__FILE__)
-Dir.glob(File.join(__DIR__, 'lib', '**', '*.rb')).each { |file| require file }
+require File.join(__DIR__, '..', 'init')
