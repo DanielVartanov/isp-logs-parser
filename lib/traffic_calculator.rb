@@ -17,8 +17,8 @@ class TrafficCalculator < Struct.new(:log_file_name, :user_address)
 protected
 
 	def print_first_ten_hosts(traffic)
-		traffic.grouped_by_host.sorted_by_bytes_count.first(10).each_pair do |host, traffic|
-			puts "#{self.user_address} <- #{host} [#{nice_bytes(traffic.bytes_count)}]"
+		traffic.highest_hosts(10).each do |host|
+			puts "#{self.user_address} <- #{host.address} [#{nice_bytes(host.amount_of_traffic)}]"
 		end
 	end
 end

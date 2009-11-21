@@ -17,6 +17,15 @@ class Traffic
 		self.class.new(@outcoming, self.local_address)
 	end
 	
+	def hosts
+		@hosts ||= grouped_by_host.map { |host_address, records| Host.new(host_address, records) }
+	end
+	
+	def highest_hosts(limit=nil)
+		sorted_hosts = hosts.sort { |left, right| right.amount_of_traffic <=> left.amount_of_traffic }
+		limit.nil? ? sorted_hosts : sorted_hosts[0..limit-1]
+	end
+	
 	def grouped_by_host
 		return @grouped_by_host if @grouped_by_host
 		
