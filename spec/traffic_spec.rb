@@ -1,5 +1,4 @@
-__DIR__ = File.dirname(__FILE__)
-require File.join(__DIR__, 'spec_helper')
+require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe Traffic do
 	describe "given a bunch of records" do
@@ -28,7 +27,7 @@ describe Traffic do
 				end
 				
 				it "should return incoming records only" do
-					@return_value.to_set == [Record.new(@facebook, @local_address), Record.new(@gmail, @local_address)]
+					@return_value.to_set.should == [Record.new(@facebook, @local_address), Record.new(@gmail, @local_address)].to_set
 				end
 			end
 			
@@ -38,7 +37,7 @@ describe Traffic do
 				end
 
 				it "should return outcoming records only" do
-					@return_value.to_set == [Record.new(@local_address, @facebook), Record.new(@local_address, @gmail)]
+					@return_value.to_set.should == [Record.new(@local_address, @facebook), Record.new(@local_address, @gmail)].to_set
 				end
 			end
 		end
