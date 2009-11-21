@@ -19,7 +19,7 @@ describe Traffic do
 
 		describe "given a Traffic instance loaded with records" do
 			before :each do
-				@traffic = Traffic.new(@records)
+				@traffic = Traffic.new(@records, @local_address)
 			end			
 			
 			describe "when #incoming is called" do
@@ -36,7 +36,7 @@ describe Traffic do
 				before :each do
 					@return_value = @traffic.outcoming
 				end
-				
+
 				it "should return outcoming records only" do
 					@return_value.to_set == [Record.new(@local_address, @facebook), Record.new(@local_address, @gmail)]
 				end
