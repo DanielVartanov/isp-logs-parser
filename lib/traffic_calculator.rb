@@ -7,16 +7,24 @@ class TrafficCalculator < Struct.new(:log_file_name, :user_address)
 	end
 
 	def print_results
-		puts "\n=== Incoming traffic ==="
+		puts results_string
+	end
+
+  def results_string
+    result = ''
+
+    result << "\n=== Incoming traffic ===\n"
 		@traffic.incoming.highest_hosts(10).each do |host|
-			puts "#{self.user_address} <- #{host.address} [#{nice_bytes(host.amount_of_traffic)}]"
+			result << "#{self.user_address} <- #{host.address} [#{nice_bytes(host.amount_of_traffic)}]\n"
 		end
 
-		puts "\n=== Outcoming traffic ==="
+		result << "\n=== Outcoming traffic ===\n"
 		@traffic.outcoming.highest_hosts(10).each do |host|
-			puts "#{self.user_address} -> #{host.address} [#{nice_bytes(host.amount_of_traffic)}]"
+			result << "#{self.user_address} -> #{host.address} [#{nice_bytes(host.amount_of_traffic)}]\n"
 		end
-	end
+
+    result
+  end
 
 protected
 
