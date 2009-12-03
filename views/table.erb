@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Table</title>
+    <script type="text/javascript" src="/assets/js/logs.js"></script>
+    <link rel="stylesheet" href="/assets/css/logs.css" type="text/css" />
+  </head>
+  <body>
+    <div align="center" width="500px">
+      <table width="500px"><tr><td>
+            
+      <fieldset>
+        <legend><span class="contentheading">Your inner traffic</span></legend>
+      <table width="500px">
+        <thead>
+          <tr>
+            <th width="20px">Favicon</th>
+            <th width="100%">Site Name(IP)</th>
+            <th width="10px"></th>
+            <th width="40px">Size</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @data[:intraffic].each do |line| %>
+          <tr>
+            <td><div id="favicon_<%= line["IP"]  %>"></div></td>
+            <td align="center" id="sitename_in_<%= line["IP"]  %>"><%= line["IP"]  %></td>
+            <td><a href="javascript:void(0)" onclick="getsitename('/resolve/<%= line["IP"]  %>', '<%= line["IP"]  %>', 'sitename_in_');"><img src="/images/resolve.png"/></a></td>
+            <td><%= line["size"]  %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      </fieldset>
+
+      </td></tr><tr><td>
+            
+      <fieldset>
+        <legend><span class="contentheading">Your outer traffic</span></legend>
+      <table width="500px">
+        <thead>
+          <tr>
+            <th width="20px">Favicon</th>
+            <th>Site Name(IP)</th>
+            <th width="10px"></th>
+            <th width="40px">Size</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @data[:outtraffic].each do |line| %>
+          <tr>
+            <td><div id="favicon_<%= line["IP"]  %>"></div></td>
+            <td align="center" id="sitename_out_<%= line["IP"]  %>"><%= line["IP"]  %></td>
+            <td><a href="javascript:void(0)" onclick="getsitename('/resolve/<%= line["IP"]  %>', '<%= line["IP"]  %>', 'sitename_out_');"><img src="/images/resolve.png"/></a></td>
+            <td><%= line["size"]  %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      </fieldset>
+
+            
+      </td></tr></table>
+    </div>
+
+    <div class="footer" align="center">
+        All rights reserved. 2009. <br/>
+        Authors : Daniel, Misha, Esen
+    </div>
+  </body>
+</html>

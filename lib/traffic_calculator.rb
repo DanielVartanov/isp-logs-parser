@@ -6,6 +6,22 @@ class TrafficCalculator < Struct.new(:log_file_name, :user_address)
 		@traffic = Traffic.new(parser.records, self.user_address)
 	end
 
+	def get_results
+    res = Hash.new
+    res[:intraffic] = Array.new()
+    res[:outtraffic] = Array.new()
+
+		@traffic.incoming.highest_hosts(10).each do |host|
+      res[:intraffic].push(Hash["IP" => host.address , "size" => nice_bytes(host.amount_of_traffic)])
+		end
+
+		@traffic.outcoming.highest_hosts(10).each do |host|
+      res[:outtraffic].push(Hash["IP" => host.address , "size" => nice_bytes(host.amount_of_traffic)])
+		end
+
+    res
+	end
+
 	def print_results
 		puts "\n=== Incoming traffic ==="
 		@traffic.incoming.highest_hosts(10).each do |host|
