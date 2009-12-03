@@ -4,6 +4,7 @@ require File.join(current_directory, 'init')
 require 'rubygems'
 require 'sinatra'
 require 'erb'
+require 'resolv'
 
 get '/' do
   erb :main
@@ -21,6 +22,7 @@ post '/' do
   erb :results
 end
 
-get '/resolve/:IP' do
-  'www.resolvedname.kg'
+get '/resolve/:ip' do
+  resolver = Resolv::DNS.new
+  resolver.getname(params[:ip])
 end
