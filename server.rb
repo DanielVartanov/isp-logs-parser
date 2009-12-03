@@ -24,5 +24,9 @@ end
 
 get '/resolve/:ip' do
   resolver = Resolv::DNS.new
-  resolver.getname(params[:ip]).to_s
+  begin
+    resolver.getname(params[:ip]).to_s
+  rescue Resolv::ResolvError
+    params[:ip]
+  end
 end
