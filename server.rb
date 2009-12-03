@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 current_directory = File.dirname(__FILE__)
 require File.join(current_directory, 'init')
 
@@ -12,7 +14,7 @@ end
 
 post '/' do
   tempfile = params[:file][:tempfile]
-  
+
   traffic_calculator = TrafficCalculator.new tempfile.path, '77.235.9.36'
   traffic_calculator.calculate!
   @result_string = traffic_calculator.results_string
@@ -24,5 +26,5 @@ end
 
 get '/resolve/:ip' do
   resolver = Resolv::DNS.new
-  resolver.getname(params[:ip])
+  resolver.getname(params[:ip]).to_s
 end
