@@ -10,7 +10,7 @@ end
 
 describe Record do
   include RecordSpecHelper
-  
+
   describe "when record is created within 8:00AM and 23:59PM" do
     before :each do
       @records = [record_transferred_at('8:00'),

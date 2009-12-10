@@ -8,7 +8,16 @@ class Record < Struct.new(:source_address, :destination_address, :bytes,
   def nightly?
     ! daily?
   end
-  
+
+  def internal?
+    InternalIPRanges.include?(source_address) and
+	InternalIPRanges.include?(destination_address)
+  end
+
+  def world?
+    ! internal?
+  end
+
 protected
 
   def day_bounds
