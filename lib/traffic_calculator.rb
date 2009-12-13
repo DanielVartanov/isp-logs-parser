@@ -1,9 +1,9 @@
-class TrafficCalculator < Struct.new(:log_file_name, :user_address)
+class TrafficCalculator < Struct.new(:log_file_name)
 	def calculate!
 		parser = Parser.new
 		parser.parse_file!(self.log_file_name)
 
-		@traffic = Traffic.new(parser.records, self.user_address)
+		@traffic = Traffic.new(parser.records)
 	end
 
 	def get_results
@@ -24,7 +24,7 @@ class TrafficCalculator < Struct.new(:log_file_name, :user_address)
 
 	def print_results
 		puts results_string
-	end
+    end
 
   def results_string
     result = ''

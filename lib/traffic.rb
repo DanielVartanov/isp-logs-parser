@@ -2,9 +2,9 @@ class Traffic
 	attr_accessor :local_address
 	attr_reader :records
 	
-	def initialize(records, local_address)
+	def initialize(records, local_address_found = false)
 		@records = records
-		@local_address = local_address
+		@local_address = (local_address_found) ? local_address_found : local_address_find
 	end
 
 	def incoming
@@ -40,5 +40,21 @@ class Traffic
 		end
 		
 		@grouped_by_host
-	end
+    end
+
+    def local_address_find
+        if (@records[0])
+           ip1, ip2 = @records[0].map {|address| address}
+        end
+        @records.each do |record|
+           ipn1, ipn2 = record.map {|address| address}
+           if (ip1!=ipn1 && ip1!=ipn2) then
+             return ip2
+           else if (ip2!=ipn1 && ip2!=ipn2) then
+                  return ip1
+                end
+           end
+        end
+        ip2
+    end
 end

@@ -15,9 +15,9 @@ end
 post '/' do
   tempfile = params[:logsfile][:tempfile]
 
-  traffic_calculator = TrafficCalculator.new tempfile.path, '77.235.9.36'
+  traffic_calculator = TrafficCalculator.new tempfile.path 
   traffic_calculator.calculate!
-  @data = traffic_calculator.get_results
+  @data = traffic_calculator.get_results    
 
   erb :results
 end
@@ -30,3 +30,5 @@ get '/resolve/:ip' do
     params[:ip]
   end
 end
+
+
