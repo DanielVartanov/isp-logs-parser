@@ -1,6 +1,4 @@
 class Traffic < Scope
-  attr_accessor :local_address
-  
   define_scope :internal, proc { |record| record.internal? }
   define_scope :world, proc { |record| record.world? }
   define_scope :daily, proc { |record| record.daily? }
@@ -8,11 +6,13 @@ class Traffic < Scope
   define_scope :outcoming, proc { |record| record.source_address == local_address }
   define_scope :incoming, proc { |record| record.destination_address == local_address }
 
+	def local_address
+    @local_address ||= find_local_address
+  end
+
   def highest_ten_hosts
     highest_hosts(10)
   end
-
-protected
 
   def hosts
     @hosts ||= grouped_by_host.map { |host_address, records| Host.new(host_address, records) }
@@ -37,5 +37,21 @@ protected
     end
     
     @grouped_by_host
+  end
+
+  def local_address_find
+    if (@records[0])
+     ip1, ip2 = @records[0].map {|address| address}
+    end
+    @records.each do |record|
+     ipn1, ipn2 = record.map {|address| address}
+     if (ip1!=ipn1 && ip1!=ipn2) then
+       return ip2
+     else if (ip2!=ipn1 && ip2!=ipn2) then
+            return ip1
+          end
+     end
+    end
+    ip2
   end
 end
