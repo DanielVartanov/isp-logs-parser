@@ -17,7 +17,7 @@ describe Traffic do
 
 		describe "given a Traffic instance loaded with records" do
 			before :each do
-				@traffic = Traffic.new(@records, @local_address)
+				@traffic = Traffic.new(@records)        
 			end			
 
 			describe "when after that #group_by_host is called" do
@@ -25,7 +25,7 @@ describe Traffic do
 					@return_value = @traffic.grouped_by_host
 				end
 
-				it "should return records grouped by *reomte* host" do
+				it "should return records grouped by *remote* host" do
 					@return_value.to_hash.should == {
 						@facebook => [Record.new(@facebook, @local_address), Record.new(@local_address, @facebook)],
 						@gmail => [Record.new(@gmail, @local_address), Record.new(@local_address, @gmail)]

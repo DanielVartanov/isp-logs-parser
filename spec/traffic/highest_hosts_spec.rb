@@ -17,10 +17,10 @@ describe Traffic do
 
 		describe "given a Traffic instance loaded with records" do
 			before :each do
-				@traffic = Traffic.new(@records, @local_address)
+				@traffic = Traffic.new @records        
 			end			
 
-			describe "when #hightest_hosts is called without argumcch doents" do
+			describe "when #hightest_hosts is called without argumt" do
 				before :each do
 					@return_value = @traffic.highest_hosts
 				end
@@ -35,8 +35,8 @@ describe Traffic do
 					@return_value[1].amount_of_traffic.should == 2
 				end
 			end
-			
-			describe "when #highest_hosts is calles with an argument" do
+
+			describe "when #highest_hosts is called with an argument" do
 				before :each do
 					@return_value = @traffic.highest_hosts(1)
 				end
