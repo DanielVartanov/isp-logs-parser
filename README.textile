@@ -1,5 +1,4 @@
-ISP logs parser
-===============
+h1. ISP logs parser
 
 Often dishonest ISP gives unreadable (by human beings) logs when asked for details of internet traffic expense.
 This issue is especially actual if you pay by amount of traffic.
@@ -7,9 +6,9 @@ This issue is especially actual if you pay by amount of traffic.
 isp-logs-parser was invented to help ISP customers extract needed info from such logs.
 For instance, the most frequent question is "which sites I spent all my traffic for?"
 
-Example of unreadable log:
---------------------------
-timestamp account_id source destination t_class packets bytes sport dport date
+h3. Example of unreadable log:
+
+<pre>timestamp account_id source destination t_class packets bytes sport dport date
 1250878466 144 77.235.9.36 217.29.21.21 260 5 552 51003 80 Sat Aug 22 00:14:26 2009
 1250878466 144 217.29.21.21 77.235.9.36 270 4 503 80 51003 Sat Aug 22 00:14:26 2009
 1250878469 144 77.235.9.36 217.29.21.21 260 5 534 51005 80 Sat Aug 22 00:14:29 2009
@@ -18,12 +17,12 @@ timestamp account_id source destination t_class packets bytes sport dport date
 1250878472 144 77.235.9.36 217.29.21.21 260 5 542 51007 80 Sat Aug 22 00:14:32 2009
 1250878472 144 217.29.21.21 77.235.9.36 270 4 551 80 51007 Sat Aug 22 00:14:32 2009
 1250878472 144 77.235.9.36 217.29.21.21 260 5 536 51008 80 Sat Aug 22 00:14:32 2009
-......
+......</pre>
 
 
-Example of isp-logs-parser output:
-----------------------------------
-=== Incoming traffic ===
+h3. Example of isp-logs-parser output:
+
+<pre>=== Incoming traffic ===
 77.235.9.36 <- 212.112.103.210 [660MB]
 77.235.9.36 <- 86.40.182.30 [147MB]
 77.235.9.36 <- 212.112.98.122 [80.7MB]
@@ -45,7 +44,21 @@ Example of isp-logs-parser output:
 77.235.9.36 -> 212.42.120.60 [190MB]
 77.235.9.36 -> 89.237.225.37 [129MB]
 77.235.9.36 -> 217.29.20.18 [99.7MB]
-77.235.9.36 -> 85.115.205.44 [88.8MB]
+77.235.9.36 -> 85.115.205.44 [88.8MB]</pre>
 
+h2. Installation
+
+<code>$ git clone git://github.com/DanielVartanov/isp-logs-parser.git</code>
+<code>$ git submodule init</code>
+<code>$ git submodule update</code>
+
+h2. Running as a console command
+
+<code>$ parse\!.rb the-log-file </code>
+
+h2. Running as a web-server
+
+<code>$ server.rb </code>
+_then access it at localhost:4567 by default (yes, Sinatra)_
 
 Copyright (c) 2009 Daniel Vartanov, released under the MIT license
