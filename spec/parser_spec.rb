@@ -21,11 +21,11 @@ LOG
 			file.write file_content
 			file.close
 		end
-		
+
 		after :all do
 			File.delete(@file_name)
 		end
-		
+
 		describe "when parse_file! is called" do
 			before :each do
 				@parser.parse_file!(@file_name)
@@ -33,8 +33,8 @@ LOG
 			
 			it "should correctly fill #records array" do
 				@parser.records.to_set.should == [
-					Record.new('77.235.9.36', '217.29.21.21', 552, 51003, 80),
-					Record.new('217.29.21.21', '77.235.9.36', 539, 80, 51005)
+					Record.new('77.235.9.36', '217.29.21.21', 552, 51003, 80, Time.at(1250878466)),
+					Record.new('217.29.21.21', '77.235.9.36', 539, 80, 51005, Time.at(1250878469))
 				].to_set
 			end	
 		end
