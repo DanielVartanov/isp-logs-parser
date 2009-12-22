@@ -27,23 +27,23 @@ class Traffic < Scope
     return @grouped_by_host if @grouped_by_host
     
     @grouped_by_host = {}
-    
-    incoming.records.each do |record|
+
+    incoming.each do |record|
 	    (@grouped_by_host[record.source_address] ||= []) << record
     end
 
-    outcoming.records.each do |record|
+    outcoming.each do |record|
 	    (@grouped_by_host[record.destination_address] ||= []) << record
     end
     
     @grouped_by_host
   end
 
-  def local_address_find
-    if (@records[0])
-     ip1, ip2 = @records[0].map {|address| address}
+  def find_local_address
+    if (self[0])
+     ip1, ip2 = self[0].map {|address| address}
     end
-    @records.each do |record|
+    self.each do |record|
      ipn1, ipn2 = record.map {|address| address}
      if (ip1!=ipn1 && ip1!=ipn2) then
        return ip2
