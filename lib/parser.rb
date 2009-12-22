@@ -23,14 +23,16 @@ class Parser
 	end
 
 	def parse_file!(filename)
-		file = File.new(filename, "r")
+    file = File.new(filename, "r")
 
-		while (line = file.gets)
-			record = parse_line(line)
-			self.records << record if record
-		end
+    while (line = file.gets)
+      record = parse_line(line)
+      self.records << record if record
+    end
 
-		file.close
+    file.close
+
+    self.records
 	end
 
 protected
