@@ -2,7 +2,7 @@ class Record < Struct.new(:source_address, :destination_address, :bytes,
                     :source_port, :destination_port, :transferred_at)
 
   def daily?
-    day_bounds.member? transferred_at
+    @daily ||= day_bounds.member? transferred_at
   end
 
   def nightly?
@@ -10,8 +10,8 @@ class Record < Struct.new(:source_address, :destination_address, :bytes,
   end
 
   def internal?
-    InternalIPRanges.include?(source_address) and
-	InternalIPRanges.include?(destination_address)
+    @internal ||= InternalIPRanges.include?(source_address) and
+      InternalIPRanges.include?(destination_address)
   end
 
   def world?
