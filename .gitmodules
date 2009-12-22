@@ -1,6 +1,6 @@
 [submodule "vendor/scopes-n-groups"]
 	path = vendor/scopes-n-groups
 	url = git@github.com:DanielVartanov/scopes-n-groups.git
-[submodule "vendor/termial-table"]
-	path = vendor/termial-table
+[submodule "vendor/terminal-table"]
+	path = vendor/terminal-table
 	url = git://github.com/visionmedia/terminal-table.git
