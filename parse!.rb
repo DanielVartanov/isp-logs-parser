@@ -1,35 +1,46 @@
 #!/usr/bin/ruby
 
-__DIR__ = File.dirname(__FILE__)
-require File.join(__DIR__, 'init')
+require File.join(File.dirname(__FILE__), 'init')
 
-def print_results(split_traffic)
-  
+def pretty_host(host)
+  "#{host.address} [#{nice_bytes(host.amount_of_traffic)}]"
 end
 
-def results_string
-  result = ''
+def result_string(split_traffic)
+  require File.join(File.dirname(__FILE__), 'vendor', 'terminal-table', 'lib', 'terminal-table')
+  require 'terminal-table/import'
+  t = table ['', 'internal', 'world']
 
-  result << "\n=== Incoming traffic ===\n"
-  @traffic.incoming.highest_hosts(10).each do |host|
-    result << "#{self.user_address} <- #{host.address} [#{nice_bytes(host.amount_of_traffic)}]\n"
+  t << ['daily', pretty_host(split_traffic[:internal][:daily].first), pretty_host(split_traffic[:world][:daily].first)]
+
+  1.upto(9).each do |index|
+    t << ['', pretty_host(split_traffic[:internal][:daily][index]), pretty_host(split_traffic[:world][:daily][index])]
   end
-
-  result << "\n=== Outcoming traffic ===\n"
-  @traffic.outcoming.highest_hosts(10).each do |host|
-    result << "#{self.user_address} -> #{host.address} [#{nice_bytes(host.amount_of_traffic)}]\n"
-  end
-
-  result
-end
   
-user_address = '77.235.9.36'
-log_file_name = 'sample.log'
+  t.add_separator
+
+  t << ['nightly', pretty_host(split_traffic[:internal][:nightly].first), pretty_host(split_traffic[:world][:nightly].first)]
+  
+  1.upto(9).each do |index|
+    t << ['', pretty_host(split_traffic[:internal][:nightly][index]), pretty_host(split_traffic[:world][:nightly][index])]
+  end
+
+  t
+end
+
+puts ARGV.inspect
+
+if ARGV.size < 1
+  puts "usage: parse\\!.rb log-file"
+  exit 1
+end
+
+log_file_name = ARGV[0]
 
 parser = Parser.new
-parser.parse_file!(log_file_name)
+records = parser.parse_file!(log_file_name)
+puts "#{records.size} records read from #{log_file_name}\n\n"
+traffic = Traffic.new records
+split_traffic = TrafficSplitter.split_traffic!(traffic)
 
-traffic_calculator = TrafficCalculator.new local_address, records
-split_traffic = traffic_calculator.split_traffic!
-
-print_results(spit_traffic)
+puts result_string(split_traffic)
