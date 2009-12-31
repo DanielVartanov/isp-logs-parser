@@ -2,11 +2,11 @@ h1. ISP logs parser
 
 h2. Introduction
 
-Often dishonest ISP gives unreadable (by human beings) logs when asked for details of internet traffic expense.
+Often dishonest ISP gives unreadable (by human beings) logs when asked for details of internet traffic expenses.
 This issue is especially actual if you pay by amount of traffic.
 
-isp-logs-parser was invented to help ISP customers extract needed info from such logs.
-For instance, the most frequent question is "which sites I spent all my traffic for?"
+isp-logs-parser was developed to help ISP customers extract needed info from such logs.
+For instance, to answer the most popular question “which sites I've spent all my traffic for?”
 
 h3. Example of unreadable log:
 
