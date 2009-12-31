@@ -10,8 +10,8 @@ class Traffic < Scope
     @local_address ||= find_local_address
   end
 
-  def highest_ten_hosts
-    highest_hosts(10)
+  def highest_five_hosts
+    highest_hosts(5)
   end
 
   def hosts

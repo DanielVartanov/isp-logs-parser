@@ -6,4 +6,12 @@ class Host < Struct.new(:address, :records)
     end
     summ
   end
+
+  def daily?
+    records.first.daily?
+  end
+
+  def internal?
+    records.first.internal?
+  end
 end
