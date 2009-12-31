@@ -10,8 +10,8 @@ class Traffic < Scope
     @local_address ||= find_local_address
   end
 
-  def highest_five_hosts
-    highest_hosts(5)
+  def highest_twenty_hosts
+    highest_hosts(20)
   end
 
   def hosts
@@ -20,7 +20,7 @@ class Traffic < Scope
 
   def highest_hosts(limit=0)
     sorted_hosts = hosts.sort { |left, right| right.amount_of_traffic <=> left.amount_of_traffic }
-    limit.nil? ? sorted_hosts : sorted_hosts[0..limit-1]
+    sorted_hosts[0..limit-1]
   end
 
   def grouped_by_host
